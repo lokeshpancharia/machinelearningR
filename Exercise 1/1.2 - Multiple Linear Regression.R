@@ -151,3 +151,7 @@ gradientDescentMultiV <- function(X, y) {
 thetaV = gradientDescentMultiV(X_norm, data[3])
 
 ## Compare with multiple linear regression in R
+data$SizeNorm = X_norm$Size
+data$NumBedroomsNorm = X_norm$NumBedrooms
+model1 = lm(Price ~ SizeNorm + NumBedroomsNorm, data = data)
+summary(model1)
