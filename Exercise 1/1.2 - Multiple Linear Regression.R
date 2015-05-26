@@ -13,7 +13,7 @@ colnames(data) = c("Size", "NumBedrooms", "Price")
 # Define the X
 X = data[1:2]
 
-### Feature Normalization
+X### Feature Normalization
 featureNormalizeLoop <- function(X) {
 	# Returns a normalize version of X where the mean value of each feature is 0
 	# and the standard deviation is 1. This is often the good preprocessing step
@@ -134,5 +134,20 @@ gradientDescentMulti <- function(X, y, theta, alpha, num_iters) {
 ans = gradientDescentMulti(X_norm, data[3], theta, alpha, iterations)
 theta = ans[[1]]
 
+# Load library
+library(MASS)
 # Create another function for Vectorized Multiple Linear Regression Implementation
+gradientDescentMultiV <- function(X, y) {
+    # Performs gradient descent based on vectorized implementations
+    
+    # Convert X and y as matrix
+    X = as.matrix(X)
+    y = as.matrix(y)
+    
+    theta = ginv(t(X) %*% X) %*% t(X) %*% y
+    theta
+}
 
+thetaV = gradientDescentMultiV(X_norm, data[3])
+
+## Compare with multiple linear regression in R
